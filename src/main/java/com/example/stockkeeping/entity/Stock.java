@@ -1,26 +1,33 @@
 package com.example.stockkeeping.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "stock")
 public class Stock{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
+    @NotEmpty
+    @Column(unique = true)
     private String itemCode;
+    @NotEmpty
     private String itemName;
-    private Integer itemQuantity;
+    private int itemQuantity;
+    private int remainingQuantity = itemLeft();
     private LocalDate date = LocalDate.now();
 
+
+    public int itemLeft () {
+        Issuance issuance = new Issuance();
+        return (getItemQuantity() - issuance.getIssuedQuantity());
+    }
 }
 
 

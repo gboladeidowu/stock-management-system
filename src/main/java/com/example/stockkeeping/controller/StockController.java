@@ -7,11 +7,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/admin/stocks")
+@RequestMapping("/api/stocks")
 public class StockController {
 
     private final StockService stockService;
@@ -23,14 +22,32 @@ public class StockController {
     }
 
     // display item by item code
-    @GetMapping("/{itemCode}")
-    public Optional<Stock> getByItemCode(@PathVariable String itemCode){
-        return stockService.findItemCode(itemCode);
+    @GetMapping("/code/{itemCode}")
+    public Iterable<Stock> getByItemCode(@PathVariable String itemCode){
+        return stockService.findItemByCode(itemCode);
     }
 
     // add a new item to the stock
     @PostMapping("/new")
-    public void newStock(@Valid @RequestBody Stock stock){
+    public void newStock (@Valid @RequestBody Stock stock){
         stockService.saveStock(stock);
     }
+    @PutMapping("/update/{itemCode}")
+    public void updateStock(@PathVariable String itemCode, @Valid @RequestBody Stock stock){
+        stockService.updateStock(itemCode, stock);
+    }
+
+    // delete items by item code
+    @DeleteMapping("/delete/{itemCode}")
+    public Iterable<Stock> deleteByItemCode(@PathVariable String itemCode){
+        return stockService.deleteStockByItemCode(itemCode);
+    }
+
+    // delete all items in stock
+    @DeleteMapping("/delete")
+    public void deleteStocks(){
+        stockService.deleteStocks();
+        System.out.println("All stocks deleted");
+    }
+
 }
