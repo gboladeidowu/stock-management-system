@@ -2,7 +2,6 @@ package com.example.stockkeeping.controller;
 
 import com.example.stockkeeping.entity.Stock;
 import com.example.stockkeeping.service.StockService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
