@@ -23,17 +23,18 @@ public class StockController {
 
     // display item by item code
     @GetMapping("/code/{itemCode}")
-    public Iterable<Stock> getByItemCode(@PathVariable String itemCode){
+    public Stock getByItemCode(@PathVariable String itemCode){
         return stockService.findItemByCode(itemCode);
     }
 
     // add a new item to the stock
     @PostMapping("/new")
-    public void newStock (@Valid @RequestBody Stock stock){
+    public void newStock (@RequestBody Stock stock){
         stockService.saveStock(stock);
     }
+
     @PutMapping("/update/{itemCode}")
-    public void updateStock(@PathVariable String itemCode, @Valid @RequestBody Stock stock){
+    public void updateStock(@PathVariable String itemCode, @RequestBody Stock stock){
         stockService.updateStock(itemCode, stock);
     }
 

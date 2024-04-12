@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StockRepository extends JpaRepository<Stock, Long> {
     // perform actions by code
-    Iterable<Stock> findByItemCode(String itemCode);
+    Stock findByItemCode(String itemCode);
     boolean existsByItemCode(String itemCode);
     Iterable<Stock> deleteByItemCode(String itemCode);
 

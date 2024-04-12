@@ -15,19 +15,14 @@ public class Stock{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     @NotEmpty
-    @Column(unique = true)
     private String itemCode;
     @NotEmpty
     private String itemName;
     private int itemQuantity;
-    private int remainingQuantity = itemLeft();
+    private int remainingQuantity;
     private LocalDate date = LocalDate.now();
 
 
-    public int itemLeft () {
-        Issuance issuance = new Issuance();
-        return (getItemQuantity() - issuance.getIssuedQuantity());
-    }
 }
 
 

@@ -21,7 +21,7 @@ public class StockService {
     }
 
     // fetch stock by item code from database
-    public Iterable<Stock> findItemByCode(String itemCode){
+    public Stock findItemByCode(String itemCode){
         if (!stockRepository.existsByItemCode(itemCode)) {
             throw new IllegalStateException("Product with code "+itemCode+" not found.");
         }
@@ -36,6 +36,7 @@ public class StockService {
         Stock newStock = stockRepository.save(stock);
         newStock.setItemCode(newStock.getItemCode().toLowerCase());
         newStock.setItemName(newStock.getItemName().toLowerCase());
+        newStock.setRemainingQuantity(stock.getItemQuantity());
         stockRepository.save(newStock);
     }
 
