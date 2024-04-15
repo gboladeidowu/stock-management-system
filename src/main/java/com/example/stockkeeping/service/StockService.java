@@ -1,6 +1,6 @@
 package com.example.stockkeeping.service;
 
-import com.example.stockkeeping.entity.Stock;
+import com.example.stockkeeping.model.Stock;
 import com.example.stockkeeping.repository.StockRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +29,8 @@ public class StockService {
     }
 
     // add a new item to the stock in database
-    public void saveStock(Stock stock){
-        if (stockRepository.existsByItemCode(stock.getItemCode())){
+    public Stock saveStock(Stock stock){
+        if (!stockRepository.existsByItemCode(stock.getItemCode())){
             throw new IllegalStateException("Item with code " + stock.getItemCode() + " already exists, make an update instead.");
         }
         Stock newStock = stockRepository.save(stock);
@@ -38,6 +38,7 @@ public class StockService {
         newStock.setItemName(newStock.getItemName().toLowerCase());
         newStock.setRemainingQuantity(stock.getItemQuantity());
         stockRepository.save(newStock);
+        return newStock;
     }
 
     // update previous stock from database

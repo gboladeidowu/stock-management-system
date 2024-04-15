@@ -10,4 +10,13 @@ public class StockKeepingApplication {
         SpringApplication.run(StockKeepingApplication.class, args);
     }
 
+//    @Bean
+//    CommandLineRunner runner(StockRepository stockRepository){
+//        return  args -> {
+//            Stock newStock = stockRepository.save(new Stock(1L, "tb500", "Tooth brush", 20, 20, LocalDate.now()));
+//
+//        };
+//
+//        }
+
 }

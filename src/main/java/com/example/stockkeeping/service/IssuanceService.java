@@ -1,8 +1,8 @@
 package com.example.stockkeeping.service;
 
 
-import com.example.stockkeeping.entity.Issuance;
-import com.example.stockkeeping.entity.Stock;
+import com.example.stockkeeping.model.Issuance;
+import com.example.stockkeeping.model.Stock;
 import com.example.stockkeeping.repository.IssuanceRepository;
 import com.example.stockkeeping.repository.StockRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +41,12 @@ public class IssuanceService {
 
     // create a new issuance record
     public void save(Issuance issuance){
+        if (!stockRepository.existsByItemCode(issuance.getItemCode())){
+            throw new IllegalStateException("Item with code: " + issuance.getItemCode() + " not in stock");
+        }
+        else if (issuance.getIssuedQuantity() > stockRepository.findByItemCode(issuance.getItemCode()).getRemainingQuantity()){
+            throw new IllegalStateException("Quantity exceeded");
+        }
         Issuance issued = issuanceRepository.save(issuance);
         issued.setItemCode(issuance.getItemCode().toLowerCase());
         issued.setItemName(issuance.getItemName().toLowerCase());

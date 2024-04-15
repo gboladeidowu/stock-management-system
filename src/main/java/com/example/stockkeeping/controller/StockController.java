@@ -1,6 +1,6 @@
 package com.example.stockkeeping.controller;
 
-import com.example.stockkeeping.entity.Stock;
+import com.example.stockkeeping.model.Stock;
 import com.example.stockkeeping.service.StockService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
 package com.example.stockkeeping.controller;
 
-import com.example.stockkeeping.entity.Issuance;
+import com.example.stockkeeping.model.Issuance;
 import com.example.stockkeeping.service.IssuanceService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

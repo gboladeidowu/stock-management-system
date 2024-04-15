@@ -1,4 +1,4 @@
-package com.example.stockkeeping.entity;
+package com.example.stockkeeping.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;

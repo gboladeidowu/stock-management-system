@@ -1,6 +1,6 @@
 package com.example.stockkeeping.repository;
 
-import com.example.stockkeeping.entity.Stock;
+import com.example.stockkeeping.model.Stock;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
