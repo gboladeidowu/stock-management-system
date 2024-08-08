@@ -51,16 +51,17 @@ public class ItemService {
 
     // update item
     public void updateItem(Integer id, ItemDTO itemDTO){
-        Optional<Item> item = itemRepository.findById(id);
-        if (item.isPresent()) {
-            item.get().setItemCode(itemDTO.itemCode());
-            item.get().setItemName(itemDTO.itemName());
-            item.get().setItemDescription(itemDTO.itemDescription());
-            item.get().setItemQuantity(itemDTO.itemQuantity());
+        Optional<Item> optionalItem = itemRepository.findById(id);
+        if (optionalItem.isPresent()) {
+            Item item = optionalItem.get();
+            item.setItemCode(itemDTO.itemCode());
+            item.setItemName(itemDTO.itemName());
+            item.setItemDescription(itemDTO.itemDescription());
+            item.setItemQuantity(itemDTO.itemQuantity());
 
-            itemRepository.save(item.get());
+            itemRepository.save(item);
         }
-       else throw new IllegalStateException(String.format("Item with code: '%s' not found",item.get().getItemCode()));
+       else throw new IllegalStateException(String.format("Item with code: '%s' not found", itemDTO.itemCode()));
     }
 
     public void deleteItem(String itemCode) {

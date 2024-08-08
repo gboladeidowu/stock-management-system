@@ -11,8 +11,7 @@ import java.util.Optional;
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 
    Optional<Item> findByItemCode(String itemCode);
-   boolean existsByItemCode(String itemCode);
-   Item deleteByItemCode(String itemCode);
+   void deleteByItemCode(String itemCode);
    List<Item> findItemByItemCodeContainingIgnoreCaseOrItemNameContainingIgnoreCaseOrItemDescriptionContainingIgnoreCase(String itemCode, String itemName, String itemDescription);
 
 }

@@ -3,7 +3,6 @@ package com.example.stockkeeping.service;
 import com.example.stockkeeping.dto.IssuanceDTO;
 import com.example.stockkeeping.model.Issuance;
 import com.example.stockkeeping.model.Item;
-import com.example.stockkeeping.model.User;
 import com.example.stockkeeping.repository.IssuanceRepository;
 import com.example.stockkeeping.repository.ItemRepository;
 import jakarta.transaction.Transactional;
@@ -23,7 +22,6 @@ public class IssuanceService {
     private final ItemRepository itemRepository;
 
     public void save(IssuanceDTO issuanceDTO) {
-        User user = new User();
         Optional<Item> item = itemRepository.findByItemCode(issuanceDTO.itemCode());
         if (item.isPresent()) {
             Issuance newIssuance = Issuance.builder()
